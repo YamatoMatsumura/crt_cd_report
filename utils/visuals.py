@@ -2,26 +2,12 @@ import plotly.express as px
 import pandas as pd
 import streamlit as st
 
+import utils.data as data
+
 
 def draw_ticket_volumes(df):
-    # Add monthly ticket volumes
-    df['Month'] = df['Created'].dt.to_period('M').apply(lambda r: r.start_time)
-    monthly_counts = df.groupby('Month').size().reset_index(name="ticket_count")
 
-    # Create full monthly range
-    all_months = pd.date_range(
-        start=df['Month'].min(),
-        end=df['Month'].max(),
-        freq='MS'
-    )
-
-    # Reindex to include missing months
-    monthly_counts = (
-        monthly_counts.set_index('Month')
-        .reindex(all_months, fill_value=0)
-        .rename_axis('Month')
-        .reset_index()
-    )
+    monthly_counts = data.get_monthly_agg(df)
 
     # Plotly Chart
     fig = px.line(
