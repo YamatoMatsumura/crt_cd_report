@@ -2,32 +2,21 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 from pathlib import Path
-# from datetime import datetime
 import streamlit as st
 
+import utils.data as data 
+
 def main():
+    cd_df = data.load_cd_data()
+    cd_df = data.parse_cd_data(cd_df)
 
     st.title("Classroom Down Dashboard")
-    excel_folder_path = Path("data/")
-
-    classroom_down_path = None
-    for item in excel_folder_path.iterdir():
-        if item.is_file():
-            if "Classroom Downs Report" in item.name:
-                classroom_down_path = f"{excel_folder_path}/{item.name}"
-
-    cd_df = pd.read_excel(classroom_down_path)
 
     CD_ANNOTATIONS_SIZE = 15
     CD_TITLE_SIZE = 20
     CD_AXES_SIZE = 14
 
     # TODAY = str(datetime.today().date())
-
-    # Create unique building and room names
-    cd_df["Location"] = cd_df["Location"].str.replace("Center for Technology & Learning Media (CTLM)", "CTLM", regex=False)
-    cd_df["room_names"] = cd_df['Location'].astype(str) + " " + cd_df['Location Room'].astype(str)
-    cd_df['Created'] = pd.to_datetime(cd_df['Created'])
 
     import plotly.express as px
     from datetime import datetime
