@@ -3,9 +3,9 @@ import plotly.express as px
 import pandas as pd
 
 import utils.data as data
-import utils.graph as graph
+import utils.visuals as visuals
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Ticket Overview", layout="wide")
 
 def main():
     st.markdown("<h1 style='text-align: center; margin-bottom: 40px;'>Ticket Overview</h1>", unsafe_allow_html=True)
@@ -19,33 +19,9 @@ def main():
 
         st.markdown("<h2 style='text-align: center; color: white; font-weight: 200; margin-bottom: 0px;'>Classroom Down</h2>", unsafe_allow_html=True)
         
-        st.markdown(f"""
-            <div style="text-align: center;
-                background-color: #1e2129; 
-                padding: 20px 20px 1px 20px;
-                border-radius: 12px; 
-                border: 1px solid #30363d;
-                display: inline-block;
-                min-width: 150px;
-                margin-bottom: 10px;
-            ">
-                <p style="
-                    color: #8b949e; 
-                    font-size: 0.9rem;
-                    margin: 0; 
-                    font-weight: 500;
-                    letter-spacing: 0.5px;
-                ">Total Tickets</p>
-                <h2 style="
-                    color: #ffffff; 
-                    font-size: 2.2rem; 
-                    margin: -20px 0 0 0; 
-                    font-weight: 700;
-                ">{len(cd_df)}</h2>
-            </div>
-        """, unsafe_allow_html=True)
+        visuals.draw_ticket_count(cd_df)
 
-        st.plotly_chart(graph.draw_ticket_volumes(cd_df), width='stretch')
+        st.plotly_chart(visuals.draw_ticket_volumes(cd_df), width='stretch')
     
     with right:
         crt_df = data.load_crt_data()
@@ -53,33 +29,9 @@ def main():
 
         st.markdown("<h2 style='text-align: center; color: white; font-weight: 200; margin-bottom: 0px;'>Classroom Response Team</h2>", unsafe_allow_html=True)
 
-        st.markdown(f"""
-            <div style="text-align: center;
-                background-color: #1e2129; 
-                padding: 20px 20px 1px 20px;
-                border-radius: 12px; 
-                border: 1px solid #30363d;
-                display: inline-block;
-                min-width: 150px;
-                margin-bottom: 10px;
-            ">
-                <p style="
-                    color: #8b949e; 
-                    font-size: 0.9rem;
-                    margin: 0; 
-                    font-weight: 500;
-                    letter-spacing: 0.5px;
-                ">Total Tickets</p>
-                <h2 style="
-                    color: #ffffff; 
-                    font-size: 2.2rem; 
-                    margin: -20px 0 0 0; 
-                    font-weight: 700;
-                ">{len(crt_df)}</h2>
-            </div>
-        """, unsafe_allow_html=True)
+        visuals.draw_ticket_count(cd_df)
 
-        st.plotly_chart(graph.draw_ticket_volumes(crt_df), width='stretch')
+        st.plotly_chart(visuals.draw_ticket_volumes(crt_df), width='stretch')
 
 if __name__ == "__main__":
     main()

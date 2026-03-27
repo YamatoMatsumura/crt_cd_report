@@ -1,5 +1,6 @@
 import plotly.express as px
 import pandas as pd
+import streamlit as st
 
 
 def draw_ticket_volumes(df):
@@ -61,3 +62,31 @@ def draw_ticket_volumes(df):
         ),
     )
     return fig
+
+def draw_ticket_count(df):
+    st.markdown(f"""
+        <div style="text-align: center;
+            background-color: #1e2129; 
+            padding: 20px 20px 1px 20px;
+            border-radius: 12px; 
+            border: 1px solid #30363d;
+            display: inline-block;
+            min-width: 150px;
+            margin-left: 30px;
+            margin-bottom: 10px;
+        ">
+            <p style="
+                color: #8b949e; 
+                font-size: 0.9rem;
+                margin: 0; 
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            ">Total Tickets</p>
+            <h2 style="
+                color: #ffffff; 
+                font-size: 2.2rem; 
+                margin: -20px 0 0 0; 
+                font-weight: 700;
+            ">{len(df)}</h2>
+        </div>
+    """, unsafe_allow_html=True)
