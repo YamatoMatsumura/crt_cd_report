@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 import utils.data as data
-
+import utils.colors as color
 
 def draw_ticket_volumes(df):
 
@@ -77,3 +77,43 @@ def draw_ticket_count(df):
             ">{len(df)}</h2>
         </div>
     """, unsafe_allow_html=True)
+
+def draw_crt_issue_types(df):
+    # Group by month and issue types
+    monthly_issues = df.groupby(['Month', 'ClassDownUrg:Type']).size().reset_index(name="issue_count")
+
+    fig = px.bar(
+        monthly_issues,
+        x="Month",
+        y="issue_count",
+        color="ClassDownUrg:Type",
+        color_discrete_map={
+            "General Supplies Issue": color.BLASTER_BLUE,
+            "Furniture/Facilities Issue": color.COLORADO_RED,
+            "AV / Computer/ Technology issue": color.LIGHT_BLUE
+        },
+        barmode="stack",
+        labels={"ClassDownUrg:Type": "Issue Type"},
+        category_orders={
+            "ClassDownUrg:Type": [
+                "General Supplies Issue",
+                "Furniture/Facilities Issue",
+                "AV / Computer/ Technology issue"
+            ]
+        }
+    )
+
+    fig.update_layout(
+        title_text="Issue Types Over Time",
+        title_x=0.5,
+        title_xanchor='center',
+        title_font=dict(size=20),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        margin=dict(l=0, r=0, t=50, b=0),
+        xaxis_title='Month',
+        yaxis_title='Tickets',
+        legend_traceorder='reversed'
+    )
+
+    return fig
