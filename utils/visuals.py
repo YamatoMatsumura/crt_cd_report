@@ -16,7 +16,11 @@ def draw_ticket_volumes(df):
     )
 
     # Shade below line
-    fig.update_traces(fill='tozeroy')
+    fig.update_traces(
+        fill='tozeroy',
+        line=dict(color=color.EARTH_BLUE),
+        opacity=0.3
+    )
 
     # Ensure last month's label is shown
     x_start = monthly_counts['Month'].min()
@@ -33,13 +37,13 @@ def draw_ticket_volumes(df):
         yaxis=dict(
             range=[0, 130],
             showgrid=True, 
-            gridcolor="#30363d", 
-            color="#8b949e"
+            gridcolor=color.DARK_BLUE,
+            color=color.LIGHT_BLUE
         ),
         xaxis=dict(
             range=[x_start, x_end],
             showgrid=False,
-            color="#8b949e",
+            color=color.LIGHT_BLUE,
             tickmode='linear',
             dtick="M1",
             tickformat="%b %Y",
@@ -53,7 +57,7 @@ def draw_ticket_count(df):
     st.markdown(f"""
         <div style="
             text-align: center;
-            background-color: #1e2129; 
+            background-color: {color.DARK_BLUE}; 
             padding: 20px 20px 1px 20px;
             border-radius: 12px; 
             border: 1px solid #30363d;
@@ -63,14 +67,14 @@ def draw_ticket_count(df):
             margin-bottom: 10px;
         ">
             <p style="
-                color: #8b949e; 
+                color: {color.LIGHT_BLUE}; 
                 font-size: 0.9rem;
                 margin: 0; 
                 font-weight: 500;
                 letter-spacing: 0.5px;
             ">Total Tickets</p>
             <h2 style="
-                color: #ffffff; 
+                color: {color.WHITE} 
                 font-size: 2.2rem;
                 margin: -20px 0 0 15px; 
                 font-weight: 700;
