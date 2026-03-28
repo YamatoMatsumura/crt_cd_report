@@ -50,24 +50,20 @@ def draw_ticket_count(df):
     st.markdown(f"""
         <div style="
             text-align: center;
-            background-color: var(--secondary-background-color); 
             padding: 20px 20px 1px 20px;
             border-radius: 12px; 
-            border: 1px solid var(--faded-text-color);
             display: inline-block;
             min-width: 150px;
             margin-left: 30px;
             margin-bottom: 10px;
         ">
             <p style="
-                color: var(--faded-text-color); 
                 font-size: 0.9rem;
                 margin: 0; 
                 font-weight: 500;
                 letter-spacing: 0.5px;
             ">Total Tickets</p>
             <h2 style="
-                color: var(--text-color); 
                 font-size: 2.2rem;
                 margin: -20px 0 0 15px; 
                 font-weight: 700;
@@ -84,11 +80,6 @@ def draw_crt_issue_types(df):
         x="Month",
         y="issue_count",
         color="ClassDownUrg:Type",
-        # color_discrete_map={
-        #     "General Supplies Issue": "#09396C",
-        #     "Furniture/Facilities Issue": "#CC4628",
-        #     "AV / Computer/ Technology issue": "#0272DE"
-        # },
         barmode="stack",
         labels={"ClassDownUrg:Type": "Issue Type"},
         category_orders={

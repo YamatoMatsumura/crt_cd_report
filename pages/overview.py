@@ -14,7 +14,7 @@ with left:
     cd_df = data.load_cd_data()
     cd_df = data.parse_cd_data(cd_df)
 
-    st.markdown("<h2 style='text-align: center; color: var(--text-color); font-weight: 200; margin-bottom: 0px;'>Classroom Down</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-weight: 200; margin-bottom: 0px;'>Classroom Down</h2>", unsafe_allow_html=True)
     
     visuals.draw_ticket_count(cd_df)
 
@@ -24,7 +24,7 @@ with right:
     crt_df = data.load_crt_data()
     crt_df = data.parse_crt_data(crt_df)
 
-    st.markdown("<h2 style='text-align: center; color: var(--text-color); font-weight: 200; margin-bottom: 0px;'>Classroom Response Team</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; font-weight: 200; margin-bottom: 0px;'>Classroom Response Team</h2>", unsafe_allow_html=True)
 
     visuals.draw_ticket_count(crt_df)
 
