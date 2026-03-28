@@ -51,7 +51,8 @@ def draw_ticket_volumes(df):
 
 def draw_ticket_count(df):
     st.markdown(f"""
-        <div style="text-align: center;
+        <div style="
+            text-align: center;
             background-color: #1e2129; 
             padding: 20px 20px 1px 20px;
             border-radius: 12px; 
@@ -70,8 +71,8 @@ def draw_ticket_count(df):
             ">Total Tickets</p>
             <h2 style="
                 color: #ffffff; 
-                font-size: 2.2rem; 
-                margin: -20px 0 0 0; 
+                font-size: 2.2rem;
+                margin: -20px 0 0 15px; 
                 font-weight: 700;
             ">{len(df)}</h2>
         </div>
