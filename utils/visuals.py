@@ -3,10 +3,8 @@ import pandas as pd
 import streamlit as st
 
 import utils.data as data
-import utils.colors as color
 
 def draw_ticket_volumes(df):
-
     monthly_counts = data.get_monthly_agg(df)
 
     # Plotly Chart
@@ -18,32 +16,27 @@ def draw_ticket_volumes(df):
     # Shade below line
     fig.update_traces(
         fill='tozeroy',
-        line=dict(color=color.EARTH_BLUE),
         opacity=0.3
     )
 
     # Ensure last month's label is shown
     x_start = monthly_counts['Month'].min()
     x_end = monthly_counts['Month'].max() + pd.DateOffset(months=1)
+    
     fig.update_layout(
         title_x=0.5,
         title_xanchor='center',
         title_font=dict(size=20),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
         margin=dict(l=0, r=0, t=50, b=0),
         xaxis_title='Month',
         yaxis_title='Tickets',
         yaxis=dict(
             range=[0, 130],
-            showgrid=True, 
-            gridcolor=color.DARK_BLUE,
-            color=color.LIGHT_BLUE
+            showgrid=True
         ),
         xaxis=dict(
             range=[x_start, x_end],
             showgrid=False,
-            color=color.LIGHT_BLUE,
             tickmode='linear',
             dtick="M1",
             tickformat="%b %Y",
@@ -57,24 +50,24 @@ def draw_ticket_count(df):
     st.markdown(f"""
         <div style="
             text-align: center;
-            background-color: {color.DARK_BLUE}; 
+            background-color: var(--secondary-background-color); 
             padding: 20px 20px 1px 20px;
             border-radius: 12px; 
-            border: 1px solid #30363d;
+            border: 1px solid var(--faded-text-color);
             display: inline-block;
             min-width: 150px;
             margin-left: 30px;
             margin-bottom: 10px;
         ">
             <p style="
-                color: {color.LIGHT_BLUE}; 
+                color: var(--faded-text-color); 
                 font-size: 0.9rem;
                 margin: 0; 
                 font-weight: 500;
                 letter-spacing: 0.5px;
             ">Total Tickets</p>
             <h2 style="
-                color: {color.WHITE} 
+                color: var(--text-color); 
                 font-size: 2.2rem;
                 margin: -20px 0 0 15px; 
                 font-weight: 700;
@@ -91,11 +84,11 @@ def draw_crt_issue_types(df):
         x="Month",
         y="issue_count",
         color="ClassDownUrg:Type",
-        color_discrete_map={
-            "General Supplies Issue": color.BLASTER_BLUE,
-            "Furniture/Facilities Issue": color.COLORADO_RED,
-            "AV / Computer/ Technology issue": color.LIGHT_BLUE
-        },
+        # color_discrete_map={
+        #     "General Supplies Issue": "#09396C",
+        #     "Furniture/Facilities Issue": "#CC4628",
+        #     "AV / Computer/ Technology issue": "#0272DE"
+        # },
         barmode="stack",
         labels={"ClassDownUrg:Type": "Issue Type"},
         category_orders={
@@ -112,8 +105,6 @@ def draw_crt_issue_types(df):
         title_x=0.5,
         title_xanchor='center',
         title_font=dict(size=20),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
         margin=dict(l=0, r=0, t=50, b=0),
         xaxis_title='Month',
         yaxis_title='Tickets',
