@@ -1,8 +1,32 @@
 import plotly.express as px
 import pandas as pd
 import streamlit as st
+from pathlib import Path
+import re
+from datetime import datetime
 
 import utils.data as data
+
+def draw_last_refresh_date():
+    # Extract the last refresh date from the excel file
+    excel_folder_path = Path("data/")
+
+    for item in excel_folder_path.iterdir():
+        if item.is_file():
+            if "Classroom Downs Report" in item.name:
+                filename = item.name
+
+    match = re.search(r'(\d{2}-\d{2}-\d{4})', filename)
+    date_str = match.group(1)
+    date_obj = datetime.strptime(date_str, '%m-%d-%Y')
+    
+    formatted_date = date_obj.strftime('%B %d, %Y')
+    
+    st.markdown(f"""
+    <div style="text-align: right; font-size: 17px;">
+        As of: {formatted_date}
+    </div>
+    """, unsafe_allow_html=True)
 
 def draw_ticket_volumes(df):
     monthly_counts = data.get_monthly_agg(df)

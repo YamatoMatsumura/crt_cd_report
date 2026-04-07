@@ -6,6 +6,7 @@ import utils.visuals as visuals
 st.set_page_config(layout="wide")
 
 st.markdown("<h1 style='text-align: center; margin-bottom: 40px;'>Ticket Overview</h1>", unsafe_allow_html=True)
+visuals.draw_last_refresh_date()
 
 # Creating a structured layout
 _, left, right, _ = st.columns([0.5, 4, 4, 0.5])
