@@ -19,9 +19,9 @@ def draw_last_refresh_date():
     match = re.search(r'(\d{2}-\d{2}-\d{4})', filename)
     date_str = match.group(1)
     date_obj = datetime.strptime(date_str, '%m-%d-%Y')
-    
+
     formatted_date = date_obj.strftime('%B %d, %Y')
-    
+
     st.markdown(f"""
     <div style="text-align: right; font-size: 17px;">
         As of: {formatted_date}
